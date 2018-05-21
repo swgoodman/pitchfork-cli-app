@@ -24,50 +24,27 @@ class PitchforkCLI::CLI
     # pulls in info from scraper, instatiates new lists, and prints list of lists
     puts "Select a year below to see its top five albums according to Pitchfork.com."
     @lists = PitchforkCLI::List.all
-    # puts "1. 2016"
-    # puts "2. 2015"
-    # puts "3. 2014"
-    # puts "4. 2013"
+    @lists.each.with_index(1) do |list, i|
+      puts "#{i}. #{list.year}"
+    end
   end
 
   def menu
     # gets input from user (chosen list, exit)
+
     puts "                       "
     puts "Enter the corresponding number to see the lists' top five albums."
     puts "(Enter 'exit' to leave.)"
+
     input = nil
       until input == "exit"
         input = gets.strip
-          case input
-          when "1"
-            puts "2016 top 5"
-            puts "                       "
-            puts "Type 'list' to choose another list or type 'exit' to leave."
-          when "2"
-            puts "2015 top 5"
-            puts "                       "
-            puts "Type 'list' to choose another list or type 'exit' to leave."
-          when "3"
-            puts "2014 top 5"
-            puts "                       "
-            puts "Type 'list' to choose another list or type 'exit' to leave."
-          when "4"
-            puts "2013 top 5"
-            puts "                       "
-            puts "Type 'list' to choose another list or type 'exit' to leave."
-          when "list"
-            puts "                       "
-            puts "Enter the corresponding number to see the lists' top five albums."
-            puts "(Enter 'exit' to leave.)"
-            puts "1. 2016"
-            puts "2. 2015"
-            puts "3. 2014"
-            puts "4. 2013"
-            puts "                       "
-            puts "Enter the corresponding number to see the lists' top five albums."
-            puts "(Enter 'exit' to leave.)"
+          if input.to_i > 0
+            puts @lists[input.to_i - 1]
+          elsif input == "lists"
+            list_lists
           else
-            puts "Invalid entry."
+            puts "Not sure what you want? Type 'list' or 'exit'"
           end
       end
   end
