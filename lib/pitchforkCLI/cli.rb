@@ -62,6 +62,9 @@ class PitchforkCLI::CLI
             puts "2. 2015"
             puts "3. 2014"
             puts "4. 2013"
+            puts "                       "
+            puts "Enter the corresponding number to see the lists' top five albums."
+            puts "(Enter 'exit' to leave.)"
           else
             puts "Invalid entry."
           end
