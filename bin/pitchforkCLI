@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
-require './lib/pitchforkCLI'
+require "bundler/setup"
+require "pitchforkCLI"
 
 PitchforkCLI::CLI.new.call
