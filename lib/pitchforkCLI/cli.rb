@@ -40,7 +40,8 @@ class PitchforkCLI::CLI
       until input == "exit"
         input = gets.strip
           if input.to_i > 0
-            puts @lists[input.to_i - 1]
+            the_list = @lists[input.to_i - 1]
+            puts "#{the_list.top_five}"
           elsif input == "lists"
             list_lists
           else
