@@ -6,6 +6,8 @@ class PitchforkCLI::CLI
   def call
     greeting
     list_lists
+    menu
+    goodbye
   end
 
   def greeting
@@ -18,7 +20,15 @@ class PitchforkCLI::CLI
   end
 
   def list_lists
+    # pulls in info from scraper, instatiates new lists, and prints list of lists
+  end
 
+  def menu
+    # gets input from user (chosen list, exit)
+  end
+
+  def goodbye
+    # prints goodbye message
   end
 
 end
