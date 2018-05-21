@@ -2,6 +2,7 @@
 require 'pry'
 
 class PitchforkCLI::CLI
+  attr_accessor :lists
 
   def call
     greeting
@@ -22,11 +23,11 @@ class PitchforkCLI::CLI
   def list_lists
     # pulls in info from scraper, instatiates new lists, and prints list of lists
     puts "Select a year below to see its top five albums according to Pitchfork.com."
-    # @lists = PitchforkCLI::Lists.all
-    puts "1. 2016"
-    puts "2. 2015"
-    puts "3. 2014"
-    puts "4. 2013"
+    @lists = PitchforkCLI::List.all
+    # puts "1. 2016"
+    # puts "2. 2015"
+    # puts "3. 2014"
+    # puts "4. 2013"
   end
 
   def menu
