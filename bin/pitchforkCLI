@@ -1,3 +1,5 @@
 #!/usr/bin/env ruby
 
-puts "What upppppp."
+require './lib/pitchforkCLI'
+
+PitchforkCLI::CLI.new.call
