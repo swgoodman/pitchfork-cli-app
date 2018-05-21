@@ -13,16 +13,24 @@ class PitchforkCLI::List
 
   def self.all
     # returns all instances of lists
-
-    list_1 = self.new(2016)
-    list_2 = self.new(2015)
-    list_3 = self.new(2014)
-
-    [list_1, list_2, list_3]
+    @@all
   end
 
   def self.scrape_list
     #scrape's list title from site
+    doc = Nokogiri::HTML(open("https://pitchfork.com"))
+    binding.pry
+
+    lists = doc.search("div.lists").text
+
+    year = doc.search("span.year")[1].text
+
+    list.each do |list|
+      list = self.new()
+
+      
+
+
 
   end
 
