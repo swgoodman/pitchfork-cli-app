@@ -21,11 +21,6 @@ class PitchforkCLI::List
     doc = Nokogiri::HTML(open("https://pitchfork.com"))
 
     list = doc.search("span.year")[1..10].text.scan(/..../)
-    # urls = []
-    # if doc.search("div.lists li a").attribute('href').value == true
-    #   urls << doc.search("div.lists li a").attribute('href').value
-    # end
-
 
     list.each.with_index(1) do |list, i|
       list = self.new
