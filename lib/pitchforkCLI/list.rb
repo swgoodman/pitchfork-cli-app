@@ -20,20 +20,19 @@ class PitchforkCLI::List
     #scrape's list title from site
     doc = Nokogiri::HTML(open("https://pitchfork.com"))
 
-        binding.pry
-
     list = doc.search("span.year")[1..10].text.scan(/..../)
-    urls = doc.at_css('div.lists a:contains("Albums")')['href']
-    url_gang = urls.tap {|link| link["href"]}
+    # urls = []
+    # if doc.search("div.lists li a").attribute('href').value == true
+    #   urls << doc.search("div.lists li a").attribute('href').value
+    # end
 
 
-    list.each.with_index do |list, i|
+    list.each.with_index(1) do |list, i|
       list = self.new
-      list.year = doc.search("span.year")[i+1].text
-      list.url = doc.at_xpath('//a[text()="Albums"]')
+      list.year = doc.search("span.year")[i].text
+      list.url = doc.search('div.lists li a:contains("Albums")')[i-1].attribute('href').value
       @@all << list
     end
-
   end
 
   def self.scrape_top_five
