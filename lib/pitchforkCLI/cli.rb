@@ -23,6 +23,7 @@ class PitchforkCLI::CLI
     # pulls in info from scraper, instatiates new lists, and prints list of lists
 
     puts "Select a year below to see its top five albums according to Pitchfork.com."
+
     @lists = PitchforkCLI::List.scrape_list
     @lists.each.with_index(1) do |list, i|
       puts "#{i}. #{list.year}"
@@ -38,15 +39,15 @@ class PitchforkCLI::CLI
 
     input = nil
       until input == "exit"
-        input = gets.strip
-          if input.to_i > 0
-            the_list = @lists[input.to_i - 1]
-            puts "#{the_list.top_five}"
-          elsif input == "lists"
-            list_lists
-          else
-            puts "Not sure what you want? Type 'list' or 'exit'"
-          end
+      input = gets.strip
+        if input.to_i > 0
+          the_list = @lists[input.to_i - 1]
+          puts "#{the_list.top_five}"
+        elsif input == "lists"
+          list_lists
+        else
+          puts "Not sure what you want? Type 'list' or 'exit'"
+        end
       end
   end
 

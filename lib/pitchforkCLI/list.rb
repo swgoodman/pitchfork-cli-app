@@ -1,8 +1,6 @@
 
 class PitchforkCLI::List
-
   attr_accessor :year, :top_five, :url
-
   @@all = []
 
   def initialize
@@ -29,5 +27,4 @@ class PitchforkCLI::List
   def self.scrape_top_five
     #scrape's top five from each list
   end
-
 end
