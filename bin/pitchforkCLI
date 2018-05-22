@@ -5,4 +5,4 @@ require "pitchforkCLI"
 
 require 'pry'
 
-PitchforkCLI::CLI.new.call
+PitchforkCLI::CLI.call

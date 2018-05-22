@@ -9,11 +9,7 @@ class PitchforkCLI::List
     @year
     @top_five
     @url
-  end
-
-  def self.all
-    # returns all instances of lists
-    @@all
+    @@all << self
   end
 
   def self.scrape_list
@@ -26,11 +22,12 @@ class PitchforkCLI::List
       list = self.new
       list.year = doc.search("span.year")[i].text
       list.url = doc.search('div.lists li a:contains("Albums")')[i-1].attribute('href').value
-      @@all << list
     end
+    @@all
   end
 
   def self.scrape_top_five
     #scrape's top five from each list
   end
+
 end

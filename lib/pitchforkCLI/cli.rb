@@ -3,11 +3,14 @@ class PitchforkCLI::CLI
 
   attr_accessor :lists
 
-  def initialize
-    @lists
+  def self.call
+    greeting
+    list_lists
+    menu
+    goodbye
   end
 
-  def greeting
+  def self.greeting
     puts "                       "
     puts "----------------------------------"
     puts "Pitchfork | Music Lists"
@@ -16,18 +19,17 @@ class PitchforkCLI::CLI
     puts "                       "
   end
 
-  def list_lists
+  def self.list_lists
     # pulls in info from scraper, instatiates new lists, and prints list of lists
 
     puts "Select a year below to see its top five albums according to Pitchfork.com."
-    @lists = PitchforkCLI::List.all
+    @lists = PitchforkCLI::List.scrape_list
     @lists.each.with_index(1) do |list, i|
       puts "#{i}. #{list.year}"
     end
-    binding.pry
   end
 
-  def menu
+  def self.menu
     # gets input from user (chosen list, exit)
 
     puts "                       "
@@ -48,17 +50,9 @@ class PitchforkCLI::CLI
       end
   end
 
-  def goodbye
+  def self.goodbye
     puts "                       "
     puts "Thanks for stopping by."
     puts "-----------------------"
   end
-
-  def call
-    greeting
-    list_lists
-    menu
-    goodbye
-  end
-
 end
