@@ -42,10 +42,10 @@ class PitchforkCLI::CLI
         if input.to_i <= PitchforkCLI::List.scrape_list.length.to_i
           the_list = @lists[input.to_i - 1]
           puts "According to Pitchfork, these are the top 5 albums of #{the_list.year}"
-          # top_five each with index do |album, i
+          # top_five each with index do |album, i|
           # puts "#. Album"
           # puts "                       "
-          # puts "Type 'list' to explore a different year or 'exit' to leave" 
+          # puts "Type 'list' to explore a different year or 'exit' to leave"
         elsif input == "lists"
           list_lists
         else

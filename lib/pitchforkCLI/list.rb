@@ -4,6 +4,8 @@ class PitchforkCLI::List
   @@all = []
 
   def initialize
+    @url
+    @top_five
     @@all << self
   end
 
@@ -15,21 +17,22 @@ class PitchforkCLI::List
     list.each.with_index(1) do |list, i|
       list = self.new
       list.year = doc.search("span.year")[i].text
-      list.url = doc.search('div.lists li a:contains("Albums")')[i-1].attribute('href').value
+      list.url = doc.search('div.lists li a:contains("Albums")')[i-1].attribute('href').text.insert(0, "https://pitchfork.com")
     end
     @@all
   end
 
   def self.url
     @url
-    binding.pry
   end
 
   def self.scrape_top_five
     #scrape's top five from each list
+    self.scrape_list.each do
+      doc = Nokogiri::HTML(open("#{self.url}"))
 
-
-
-
+      self.top_five = doc.search("span.year")[i].text
+    end
+    binding.pry
   end
 end
