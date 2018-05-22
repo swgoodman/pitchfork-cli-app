@@ -7,13 +7,6 @@ class PitchforkCLI::CLI
     @lists
   end
 
-  def call
-    greeting
-    list_lists
-    menu
-    goodbye
-  end
-
   def greeting
     puts "                       "
     puts "----------------------------------"
@@ -59,6 +52,13 @@ class PitchforkCLI::CLI
     puts "                       "
     puts "Thanks for stopping by."
     puts "-----------------------"
+  end
+
+  def call
+    greeting
+    list_lists
+    menu
+    goodbye
   end
 
 end
