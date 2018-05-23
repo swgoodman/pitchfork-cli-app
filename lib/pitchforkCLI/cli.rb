@@ -22,7 +22,7 @@ class PitchforkCLI::CLI
     # pulls in info from scraper, instatiates new lists, and prints list of lists
 
     puts "Select a year below to see its top five albums according to Pitchfork.com."
-
+    puts "                       "
     @lists = PitchforkCLI::List.scrape_lists
     @lists.each.with_index(1) do |list, i|
       puts "#{i}. #{list.year}"
