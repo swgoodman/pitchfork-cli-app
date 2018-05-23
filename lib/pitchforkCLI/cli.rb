@@ -23,7 +23,7 @@ class PitchforkCLI::CLI
 
     puts "Select a year below to see its top five albums according to Pitchfork.com."
 
-    @lists = PitchforkCLI::List.scrape_list
+    @lists = PitchforkCLI::List.scrape_lists
     @lists.each.with_index(1) do |list, i|
       puts "#{i}. #{list.year}"
     end
@@ -39,9 +39,10 @@ class PitchforkCLI::CLI
     input = nil
       until input == "exit"
       input = gets.strip
-        if input.to_i <= PitchforkCLI::List.scrape_list.length.to_i
+        if input.to_i <= PitchforkCLI::List.scrape_lists.length.to_i
           the_list = @lists[input.to_i - 1]
           puts "According to Pitchfork, these are the top 5 albums of #{the_list.year}"
+          the_list.scrape_top_five
           # top_five each with index do |album, i|
           # puts "#. Album"
           # puts "                       "
