@@ -45,12 +45,13 @@ class PitchforkCLI::CLI
           puts "According to Pitchfork, these are the top 5 albums of #{the_list.year}"
           puts "----------------------------------------------------------"
           the_list.scrape_top_five
-          the_list.top_five.each do |album|
-            puts "#{album.rank}. '#{album.name}' -- #{album.artist}"
-          end
+            the_list.top_five.reverse.each do |album|
+              puts "#{album.rank}. '#{album.name}' -- #{album.artist}"
+            end
           puts "----------------------------------------------------------"
-        elsif input == "lists"
-          list_lists
+          puts "Choose another list with 'list' or leave with 'exit'"
+        elsif input == "list"
+          self.list_lists
         else
           puts "Not sure what you want? Type 'list' or 'exit'"
         end

@@ -17,7 +17,7 @@ class PitchforkCLI::List
     #scrape's list title from site
     doc = Nokogiri::HTML(open("https://pitchfork.com"))
 
-    list = doc.search("span.year")[1..10].text.scan(/..../)
+    list = doc.search("span.year")[1..7].text.scan(/..../)
     list.each.with_index(1) do |list, i|
       list = self.new
       list.year = doc.search("span.year")[i].text.to_i
@@ -33,20 +33,69 @@ class PitchforkCLI::List
 
       doc = Nokogiri::HTML(open(self.url))
       # binding.pry
-      top_five_location = []
-      doc.search("div.list-blurb")[5..9].each do |album|
-        top_five_location << album
-      end
+
       if self.year >= 2013
+        top_five_location = []
+        doc.search("div.list-blurb")[5..9].each do |album|
+          top_five_location << album
+        end
+
         top_five_location.each.with_index(5) do |album, i|
           album = PitchforkCLI::Album.new
 
           album.rank = doc.search("div.rank")[i].text.to_i
           album.name = doc.search("h2.list-blurb__work-title")[i].text
-          album.artist = doc.search("ul.artist-links a")[i].text
+          if self.year == 2015
+            album.artist = doc.search("ul.artist-links a")[i+1].text
+          else
+            album.artist = doc.search("ul.artist-links a")[i].text
+          end
 
           self.top_five << album
         end
+
+      elsif self.year == 2012
+
+        top_five_location = []
+        doc.search("div.contents strong")[5..9].each do |album|
+          top_five_location << album
+        end
+
+        top_five_location.each.with_index(5) do |album, i|
+          album = PitchforkCLI::Album.new
+
+          album.rank = doc.search("div.contents strong")[i].text[1..1].to_i
+          album.name = doc.search("div.contents strong")[i].text.split('Â')[1][1..-1]
+          album.artist = doc.search("div.contents strong")[i].text.split(':').first[4..-1]
+
+          self.top_five << album
+        end
+
+      elsif self.year == 2011
+        # binding.pry
+        top_five_location = []
+        doc.search("div.contents strong")[5..9].each do |album|
+          top_five_location << album
+        end
+
+        top_five_location.each.with_index(5) do |album, i|
+          album = PitchforkCLI::Album.new
+
+          rank_arr = []
+          doc.css('//a[@href*="artist"]')[i+3].each do |artist|
+            rank_arr << doc.css('//a[@href*="artist"]')[i+3].text
+          end
+          rank_arr
+          binding.pry
+
+
+          album.artist = doc.css('//a[@href*="artist"]')[i+3].text
+          album.rank = rank_arr.index("album.artist")
+          album.name = doc.css('//a[@href*="album"]')[i+10].text
+
+          self.top_five << album
+        end
+
       end
 
   end
