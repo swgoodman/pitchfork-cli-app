@@ -39,7 +39,7 @@ class PitchforkCLI::CLI
     input = nil
       until input == "exit"
       input = gets.strip
-        if input.to_i <= PitchforkCLI::List.scrape_lists.length.to_i
+        if input.to_i <= 6
           the_list = @lists[input.to_i - 1]
           puts "----------------------------------------------------------"
           puts "According to Pitchfork, these are the top 5 albums of #{the_list.year}"
@@ -50,11 +50,16 @@ class PitchforkCLI::CLI
             end
           puts "----------------------------------------------------------"
           puts "Choose another list with 'list' or leave with 'exit'"
+          list_lists
+          menu
         elsif input == "list"
-          self.list_lists
+          list_lists
+        elsif input == "exit"
+          self.goodbye
         else
           puts "Not sure what you want? Type 'list' or 'exit'"
         end
+        # binding.pry
       end
   end
 

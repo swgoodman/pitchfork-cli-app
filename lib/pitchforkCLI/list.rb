@@ -75,13 +75,13 @@ class PitchforkCLI::List
         # binding.pry
         top_five_location = []
         rank_arr_rev = []
+
         doc.search("div.contents strong")[5..9].each do |album|
           top_five_location << album
         end
 
         top_five_location.each.with_index(5) do |album, i|
           album = PitchforkCLI::Album.new
-
 
           doc.css('//a[@href*="artist"]')[i+3].each do |artist|
             rank_arr = []
@@ -95,7 +95,6 @@ class PitchforkCLI::List
 
           self.top_five << album
         end
-
       end
   end
 end
